@@ -1,0 +1,28 @@
+﻿<Window x:Class="mifi_status.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:mifi_status"
+        mc:Ignorable="d"
+        Title="mifi-status" Height="227" Width="400" Icon="wifi.ico" FontFamily="Source Code Pro" ResizeMode="CanMinimize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="55*"/>
+            <ColumnDefinition Width="337*"/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="labelConn" Content="Connection" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label x:Name="labelNet" Content="Network" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label x:Name="labelSIM" Content="SIM" HorizontalAlignment="Left" Margin="13,70,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="labelUse" Content="Usage" HorizontalAlignment="Left" Margin="13,100,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label x:Name="labelBatt" Content="Battery" HorizontalAlignment="Left" Margin="13,130,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label x:Name="labelSpeed" Content="Speed (up/down)" HorizontalAlignment="Left" Margin="13,160,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label x:Name="statusNet" Content="N/A" HorizontalAlignment="Right" Margin="0,40,10,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Label x:Name="statusSIM" Content="N/A" HorizontalAlignment="Right" Margin="0,70,10,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Label x:Name="statusUse" Content="N/A" HorizontalAlignment="Right" Margin="0,100,10,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Label x:Name="statusBatt" Content="N/A" HorizontalAlignment="Right" Margin="0,130,10,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Label x:Name="statusSpeed" Content="N/A" HorizontalAlignment="Right" Margin="0,160,10,0" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="0.625,6.8"/>
+        <Label x:Name="statusConn" Content="N/A" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Grid.Column="1"/>
+
+    </Grid>
+</Window>

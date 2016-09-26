@@ -1,0 +1,16 @@
+C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\bin\Debug\mifi-status.exe.config
+C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\bin\Debug\mifi-status.exe
+C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\bin\Debug\mifi-status.pdb
+C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\obj\Debug\MainWindow.g.cs
+C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\obj\Debug\App.g.cs
+C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\obj\Debug\mifi-status_MarkupCompile.cache
+C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\obj\Debug\mifi-status_MarkupCompile.lref
+C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\obj\Debug\MainWindow.baml
+C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\obj\Debug\mifi-status.g.resources
+C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\obj\Debug\mifi_status.Properties.Resources.resources
+C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\obj\Debug\mifi-status.csproj.GenerateResource.Cache
+C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\obj\Debug\mifi-status.exe
+C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\obj\Debug\mifi-status.pdb
+C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\obj\Debug\mifi-status.csprojResolveAssemblyReference.cache
