@@ -101,7 +101,7 @@ $application->on('start', function () use ($application) {
         'fontFamily' => 'Source Code Pro',
         'left'       => 144,
     ]);
-    $application->loop->addPeriodicTimer(5, function () use ($connectionLabel, $networkLabel, $simLabel, $usageLabel, $batteryLabel,$speedLabel) {
+    $application->loop->addPeriodicTimer(5, function () use ($connectionLabel, $networkLabel, $simLabel, $usageLabel, $batteryLabel, $speedLabel) {
         $curl = new Curl();
         $curl->setTimeout(1);
         $curl->post('http://192.168.0.1/cgi-bin/qcmap_web_cgi', json_encode([
