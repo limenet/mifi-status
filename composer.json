@@ -1,0 +1,6 @@
+{
+    "require": {
+        "php-curl-class/php-curl-class": "^6.0",
+        "gabrielrcouto/php-gui": "^0.1.0"
+    }
+}
