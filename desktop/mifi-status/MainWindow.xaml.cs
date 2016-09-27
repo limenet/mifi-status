@@ -41,7 +41,7 @@ namespace mifi_status
             this.statusNet.Content = networks[json.wan.networkType];
             this.statusSIM.Content = sims[json.wan.simStatus];
             this.statusUse.Content = getFilesizeHuman(Convert.ToDouble(json.wan.totalStatistics));
-            this.statusSpeed.Content = getFilesizeHuman(Convert.ToDouble(json.wan.txSpeed)) + " / " + getFilesizeHuman(Convert.ToDouble(json.wan.rxSpeed));
+            this.statusSpeed.Content = getFilesizeHuman(Convert.ToDouble(json.wan.txSpeed)) + "/s / " + getFilesizeHuman(Convert.ToDouble(json.wan.rxSpeed) + "/s");
 
         }
 
