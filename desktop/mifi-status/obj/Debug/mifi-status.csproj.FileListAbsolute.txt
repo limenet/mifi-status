@@ -14,3 +14,4 @@ C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\obj\Debug\mifi-s
 C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\obj\Debug\mifi-status.exe
 C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\obj\Debug\mifi-status.pdb
 C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\obj\Debug\mifi-status.csprojResolveAssemblyReference.cache
+C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\bin\Debug\ManagedWifi.dll

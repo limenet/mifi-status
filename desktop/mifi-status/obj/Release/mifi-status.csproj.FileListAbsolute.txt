@@ -14,3 +14,4 @@ C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\obj\Release\mifi
 C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\obj\Release\mifi-status.csproj.GenerateResource.Cache
 C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\obj\Release\mifi-status.exe
 C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\obj\Release\mifi-status.pdb
+C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\bin\Release\ManagedWifi.dll
