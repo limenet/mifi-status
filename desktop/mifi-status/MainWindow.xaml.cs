@@ -18,9 +18,13 @@ namespace mifi_status
         {
             InitializeComponent();
         }
+        private WlanClient wlan;
         public void refreshData()
         {
-            WlanClient wlan = new WlanClient();
+            if (wlan == null)
+            {
+                this.wlan = new WlanClient();
+            }
             string ssid0;
             try
             {
@@ -33,7 +37,8 @@ namespace mifi_status
                 }
 
                 ssid0 = connectedSsids[0];
-            } catch (Exception)
+            }
+            catch (Exception)
             {
                 ssid0 = "";
             }
@@ -66,10 +71,11 @@ namespace mifi_status
                     this.statusNet.Content = networks[json.wan.networkType];
                     this.statusSIM.Content = sims[json.wan.simStatus];
                     this.statusUse.Content = getFilesizeHuman(Convert.ToDouble(json.wan.totalStatistics));
-                double rxs = Convert.ToDouble(json.wan.rxSpeed);
-                double txs = Convert.ToDouble(json.wan.txSpeed);
+                    double rxs = Convert.ToDouble(json.wan.rxSpeed);
+                    double txs = Convert.ToDouble(json.wan.txSpeed);
                     this.statusSpeed.Content = getFilesizeHuman(txs) + "/s / " + getFilesizeHuman(rxs) + "/s";
-                } catch (Exception)
+                }
+                catch (Exception)
                 {
                     setAllToNA();
                 }
