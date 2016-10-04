@@ -70,7 +70,9 @@ namespace mifi_status
                     this.statusBatt.Content = json.battery.voltage + "%";
                     this.statusNet.Content = networks[json.wan.networkType];
                     this.statusSIM.Content = sims[json.wan.simStatus];
-                    this.statusUse.Content = getFilesizeHuman(Convert.ToDouble(json.wan.totalStatistics));
+                    double ds = Convert.ToDouble(json.wan.dailyStatistics);
+                    double ts = Convert.ToDouble(json.wan.totalStatistics);
+                    this.statusUse.Content = getFilesizeHuman(ds) + " / " + getFilesizeHuman(ts);
                     double rxs = Convert.ToDouble(json.wan.rxSpeed);
                     double txs = Convert.ToDouble(json.wan.txSpeed);
                     this.statusSpeed.Content = getFilesizeHuman(txs) + "/s / " + getFilesizeHuman(rxs) + "/s";

@@ -14,7 +14,7 @@
         <Label x:Name="labelConn" Content="Connection" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
         <Label x:Name="labelNet" Content="Network" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
         <Label x:Name="labelSIM" Content="SIM" HorizontalAlignment="Left" Margin="13,70,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="labelUse" Content="Usage" HorizontalAlignment="Left" Margin="13,100,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label x:Name="labelUse" Content="Usage (day/total)" HorizontalAlignment="Left" Margin="13,100,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
         <Label x:Name="labelBatt" Content="Battery" HorizontalAlignment="Left" Margin="13,130,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
         <Label x:Name="labelSpeed" Content="Speed (up/down)" HorizontalAlignment="Left" Margin="13,160,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
         <Label x:Name="statusNet" Content="N/A" HorizontalAlignment="Right" Margin="0,40,10,0" VerticalAlignment="Top" Grid.Column="1"/>
