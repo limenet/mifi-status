@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:mifi_status"
         mc:Ignorable="d"
-        Title="mifi-status" Height="227" Width="400" Icon="wifi.ico" FontFamily="Source Code Pro" ResizeMode="CanMinimize">
+        Title="mifi-status" Height="227" Width="400" Icon="wifi_inverted.ico" FontFamily="Source Code Pro" ResizeMode="CanMinimize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="55*"/>
