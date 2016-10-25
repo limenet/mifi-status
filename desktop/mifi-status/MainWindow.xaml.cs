@@ -6,6 +6,10 @@ using System.Text;
 using System.IO;
 using NativeWifi;
 using System.Collections.ObjectModel;
+using System.Xml;
+using Microsoft.Toolkit.Uwp;
+using Microsoft.Toolkit.Uwp.Notifications;
+using Windows.UI.Notifications;
 
 namespace mifi_status
 {
@@ -14,6 +18,7 @@ namespace mifi_status
     /// </summary>
     public partial class MainWindow : Window
     {
+        int oldBatteryPercentage = 100;
         public MainWindow()
         {
             InitializeComponent();
@@ -76,6 +81,8 @@ namespace mifi_status
                     double rxs = Convert.ToDouble(json.wan.rxSpeed);
                     double txs = Convert.ToDouble(json.wan.txSpeed);
                     this.statusSpeed.Content = getFilesizeHuman(txs) + "/s / " + getFilesizeHuman(rxs) + "/s";
+
+                    sendBatteryNotification(Int32.Parse(json.battery.voltage));
                 }
                 catch (Exception)
                 {
@@ -112,5 +119,23 @@ namespace mifi_status
             // show a single decimal place, and no space.
             return String.Format("{0:0.##} {1}", len, sizes[order]);
         }
+
+        public void sendBatteryNotification(int percentage)
+        {
+            if (this.oldBatteryPercentage != percentage)
+            {
+                this.oldBatteryPercentage = percentage;
+                if (percentage <= 20)
+                {
+                    var xml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText02);
+                    var text = xml.GetElementsByTagName("text");
+                    text[0].AppendChild(xml.CreateTextNode("mifi-status"));
+                    text[1].AppendChild(xml.CreateTextNode("Battery level: " + percentage + "%"));
+                    var toast = new ToastNotification(xml);
+                    ToastNotificationManager.CreateToastNotifier("mifi-battery-low").Show(toast);
+                }
+            }            
+        }
     }
+
 }

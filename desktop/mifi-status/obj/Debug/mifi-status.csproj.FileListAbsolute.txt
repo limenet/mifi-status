@@ -15,3 +15,6 @@ C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\obj\Debug\mifi-s
 C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\obj\Debug\mifi-status.pdb
 C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\obj\Debug\mifi-status.csprojResolveAssemblyReference.cache
 C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\bin\Debug\ManagedWifi.dll
+C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\bin\Debug\Microsoft.Toolkit.Uwp.Notifications.dll
+C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\bin\Debug\Microsoft.Toolkit.Uwp.Notifications.pdb
+C:\Users\Linus\Documents\GitHub\mifi-status\desktop\mifi-status\bin\Debug\Microsoft.Toolkit.Uwp.Notifications.xml
