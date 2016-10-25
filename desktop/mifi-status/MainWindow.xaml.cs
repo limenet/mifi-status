@@ -18,9 +18,11 @@ namespace mifi_status
     /// </summary>
     public partial class MainWindow : Window
     {
+        ToastNotifier toastManager;
         int oldBatteryPercentage = 100;
         public MainWindow()
         {
+            this.toastManager = ToastNotificationManager.CreateToastNotifier("mifi-battery-low");
             InitializeComponent();
         }
         private WlanClient wlan;
@@ -132,7 +134,7 @@ namespace mifi_status
                     text[0].AppendChild(xml.CreateTextNode("mifi-status"));
                     text[1].AppendChild(xml.CreateTextNode("Battery level: " + percentage + "%"));
                     var toast = new ToastNotification(xml);
-                    ToastNotificationManager.CreateToastNotifier("mifi-battery-low").Show(toast);
+                    this.toastManager.Show(toast);
                 }
             }            
         }
