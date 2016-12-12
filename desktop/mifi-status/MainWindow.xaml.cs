@@ -6,10 +6,8 @@ using System.Text;
 using System.IO;
 using NativeWifi;
 using System.Collections.ObjectModel;
-using System.Xml;
-using Microsoft.Toolkit.Uwp;
-using Microsoft.Toolkit.Uwp.Notifications;
 using Windows.UI.Notifications;
+using System.Diagnostics;
 
 namespace mifi_status
 {
@@ -20,12 +18,12 @@ namespace mifi_status
     {
         ToastNotifier toastManager;
         int oldBatteryPercentage = 100;
+        private WlanClient wlan;
         public MainWindow()
         {
             this.toastManager = ToastNotificationManager.CreateToastNotifier("mifi-battery-low");
             InitializeComponent();
         }
-        private WlanClient wlan;
         public void refreshData()
         {
             if (wlan == null)
@@ -70,13 +68,15 @@ namespace mifi_status
                     dynamic json = JsonConvert.DeserializeObject(serializedJson);
 
                     string[] connections = { "disable", "disconnected", "connecting", "disconnecting", "connected" };
-                    string[] networks = { "no service", "GSM", "WCDMA", "LTE", "TD-SCDMA", "CDMA 1x", "CDMA EVDO" };
+                    string[] networks = { "no service", "GSM", "3G", "LTE", "TD-SCDMA", "CDMA 1x", "CDMA EVDO" };
                     string[] sims = { "invalid", "no SIM", "error", "ready", "PIN requested", "PIN verified", "PUK requested", "permanently locked" };
 
+                    int voltage = Convert.ToInt32(json.battery.voltage);
                     this.statusConn.Content = connections[json.wan.connectStatus];
                     this.statusBatt.Content = json.battery.voltage + "%";
-                    this.statusNet.Content = networks[json.wan.networkType];
+                    this.statusNet.Content = networks[json.wan.networkType] + " (" + json.wan.signalStrength + "/4)";
                     this.statusSIM.Content = sims[json.wan.simStatus];
+                    this.statusClients.Content = json.connectedDevices.number;
                     double ds = Convert.ToDouble(json.wan.dailyStatistics);
                     double ts = Convert.ToDouble(json.wan.totalStatistics);
                     this.statusUse.Content = getFilesizeHuman(ds) + " / " + getFilesizeHuman(ts);
@@ -84,7 +84,7 @@ namespace mifi_status
                     double txs = Convert.ToDouble(json.wan.txSpeed);
                     this.statusSpeed.Content = getFilesizeHuman(txs) + "/s / " + getFilesizeHuman(rxs) + "/s";
 
-                    sendBatteryNotification(Int32.Parse(json.battery.voltage));
+                    sendBatteryNotification(voltage);
                 }
                 catch (Exception)
                 {
@@ -106,6 +106,7 @@ namespace mifi_status
             this.statusSIM.Content = "N/A";
             this.statusUse.Content = "N/A";
             this.statusSpeed.Content = "N/A";
+            this.statusClients.Content = "N/A";
         }
 
         public string getFilesizeHuman(double len)
@@ -136,7 +137,8 @@ namespace mifi_status
                     var toast = new ToastNotification(xml);
                     this.toastManager.Show(toast);
                 }
-            }            
+            }
+            Debug.WriteLine("Done");
         }
     }
 
