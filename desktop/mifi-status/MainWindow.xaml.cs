@@ -26,13 +26,13 @@ namespace mifi_status
         }
         public void refreshData()
         {
-            if (wlan == null)
-            {
-                this.wlan = new WlanClient();
-            }
             string ssid0;
             try
             {
+                if (wlan == null)
+                {
+                    this.wlan = new WlanClient();
+                }
                 Collection<String> connectedSsids = new Collection<string>();
 
                 foreach (WlanClient.WlanInterface wlanInterface in wlan.Interfaces)
@@ -79,7 +79,7 @@ namespace mifi_status
                     this.statusClients.Content = json.connectedDevices.number;
                     double ds = Convert.ToDouble(json.wan.dailyStatistics);
                     double ts = Convert.ToDouble(json.wan.totalStatistics);
-                    this.statusUse.Content = getFilesizeHuman(ds) + " / " + getFilesizeHuman(ts);
+                    this.statusUse.Content = getFilesizeHuman(ds,2) + " / " + getFilesizeHuman(ts,2);
                     double rxs = Convert.ToDouble(json.wan.rxSpeed);
                     double txs = Convert.ToDouble(json.wan.txSpeed);
                     this.statusSpeed.Content = getFilesizeHuman(txs) + "/s / " + getFilesizeHuman(rxs) + "/s";
@@ -88,28 +88,29 @@ namespace mifi_status
                 }
                 catch (Exception)
                 {
-                    setAllToNA();
+                    setAllToEmptyString();
                 }
             }
             else
             {
-                setAllToNA();
+                setAllToEmptyString();
             }
 
         }
 
-        private void setAllToNA()
+        private void setAllToEmptyString()
         {
-            this.statusConn.Content = "N/A";
-            this.statusBatt.Content = "N/A";
-            this.statusNet.Content = "N/A";
-            this.statusSIM.Content = "N/A";
-            this.statusUse.Content = "N/A";
-            this.statusSpeed.Content = "N/A";
-            this.statusClients.Content = "N/A";
+            String empty = "–";
+            this.statusConn.Content = empty;
+            this.statusBatt.Content = empty;
+            this.statusNet.Content = empty;
+            this.statusSIM.Content = empty;
+            this.statusUse.Content = empty;
+            this.statusSpeed.Content = empty;
+            this.statusClients.Content = empty;
         }
 
-        public string getFilesizeHuman(double len)
+        public string getFilesizeHuman(double len, int decimalPlaces = 0)
         {
             string[] sizes = { "B", "KB", "MB", "GB" };
             int order = 0;
@@ -118,9 +119,15 @@ namespace mifi_status
                 len = len / 1024;
             }
 
-            // Adjust the format string to your preferences. For example "{0:0.#}{1}" would
-            // show a single decimal place, and no space.
-            return String.Format("{0:0.##} {1}", len, sizes[order]);
+            String decimalPlacesString = "";
+
+            while (decimalPlaces > 0)
+            {
+                decimalPlacesString += "0";
+                decimalPlaces--;
+            }
+
+                return String.Format("{0:0." + decimalPlacesString + "} {1}", len, sizes[order]);
         }
 
         public void sendBatteryNotification(int percentage)
@@ -138,8 +145,7 @@ namespace mifi_status
                     this.toastManager.Show(toast);
                 }
             }
-            Debug.WriteLine("Done");
-        }
-    }
+        }       
 
+    }
 }
