@@ -79,10 +79,10 @@ namespace mifi_status
                     this.statusClients.Content = json.connectedDevices.number;
                     double ds = Convert.ToDouble(json.wan.dailyStatistics);
                     double ts = Convert.ToDouble(json.wan.totalStatistics);
-                    this.statusUse.Content = getFilesizeHuman(ds,2) + " / " + getFilesizeHuman(ts,2);
+                    this.statusUse.Content = getFilesizeHuman(ds, 2) + " / " + getFilesizeHuman(ts, 2);
                     double rxs = Convert.ToDouble(json.wan.rxSpeed);
                     double txs = Convert.ToDouble(json.wan.txSpeed);
-                    this.statusSpeed.Content = getFilesizeHuman(txs) + "/s / " + getFilesizeHuman(rxs) + "/s";
+                    this.statusSpeed.Content = getFilesizeHuman(txs, 1) + "/s / " + getFilesizeHuman(rxs, 1) + "/s";
 
                     sendBatteryNotification(voltage);
                 }
@@ -127,7 +127,7 @@ namespace mifi_status
                 decimalPlaces--;
             }
 
-                return String.Format("{0:0." + decimalPlacesString + "} {1}", len, sizes[order]);
+            return String.Format("{0:0." + decimalPlacesString + "} {1}", len, sizes[order]);
         }
 
         public void sendBatteryNotification(int percentage)
@@ -145,7 +145,7 @@ namespace mifi_status
                     this.toastManager.Show(toast);
                 }
             }
-        }       
+        }
 
     }
 }
