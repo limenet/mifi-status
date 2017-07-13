@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:mifi_status"
         mc:Ignorable="d"
         Title="mifi-status" Height="256" Width="400" Icon="wifi_inverted.ico" FontFamily="Segeo UI" ResizeMode="CanMinimize" BorderThickness="0" Margin="0">
     <Grid>
@@ -32,19 +31,19 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="0.5*" />
         </Grid.RowDefinitions>
-        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1" x:Name="labelConn" Content="Connection"/>
-        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="2" x:Name="labelNet" Content="Network" />
-        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="3" x:Name="labelSIM" Content="SIM" />
-        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="4" x:Name="labelUse" Content="Usage (day/month)" />
-        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="5" x:Name="labelBatt" Content="Battery" />
-        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="6" x:Name="labelSpeed" Content="Speed (up/down)" />
-        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="7" x:Name="labelClients" Content="Connected devices" />
-        <Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="6" Grid.ColumnSpan="5" Grid.Row="1" FontFamily="Source Code Pro" x:Name="statusConn" Content="–"/>
-        <Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="6" Grid.ColumnSpan="5" Grid.Row="2" FontFamily="Source Code Pro" x:Name="statusNet" Content="–"/>
-        <Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="6" Grid.ColumnSpan="5" Grid.Row="3" FontFamily="Source Code Pro" x:Name="statusSIM" Content="–"/>
-        <Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="6" Grid.ColumnSpan="5" Grid.Row="4" FontFamily="Source Code Pro" x:Name="statusUse" Content="–"/>
-        <Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="6" Grid.ColumnSpan="5" Grid.Row="5" FontFamily="Source Code Pro" x:Name="statusBatt" Content="–"/>
-        <Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="6" Grid.ColumnSpan="5" Grid.Row="6" FontFamily="Source Code Pro" x:Name="statusSpeed" Content="–"/>
-        <Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="6" Grid.ColumnSpan="5" Grid.Row="7" FontFamily="Source Code Pro" x:Name="statusClients" Content="–"/>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1" x:Name="LabelConn" Content="Connection"/>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="2" x:Name="LabelNet" Content="Network" />
+        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="3" x:Name="LabelSim" Content="SIM" />
+        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="4" x:Name="LabelUse" Content="Usage (day/month)" />
+        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="5" x:Name="LabelBatt" Content="Battery" />
+        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="6" x:Name="LabelSpeed" Content="Speed (up/down)" />
+        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="7" x:Name="LabelClients" Content="Connected devices" />
+        <Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="6" Grid.ColumnSpan="5" Grid.Row="1" FontFamily="Source Code Pro" x:Name="StatusConn" Content="–"/>
+        <Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="6" Grid.ColumnSpan="5" Grid.Row="2" FontFamily="Source Code Pro" x:Name="StatusNet" Content="–"/>
+        <Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="6" Grid.ColumnSpan="5" Grid.Row="3" FontFamily="Source Code Pro" x:Name="StatusSim" Content="–"/>
+        <Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="6" Grid.ColumnSpan="5" Grid.Row="4" FontFamily="Source Code Pro" x:Name="StatusUse" Content="–"/>
+        <Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="6" Grid.ColumnSpan="5" Grid.Row="5" FontFamily="Source Code Pro" x:Name="StatusBatt" Content="–"/>
+        <Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="6" Grid.ColumnSpan="5" Grid.Row="6" FontFamily="Source Code Pro" x:Name="StatusSpeed" Content="–"/>
+        <Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="6" Grid.ColumnSpan="5" Grid.Row="7" FontFamily="Source Code Pro" x:Name="StatusClients" Content="–"/>
     </Grid>
 </Window>

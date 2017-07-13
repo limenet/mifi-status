@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using System.Net;
+﻿using System.Net;
 using Newtonsoft.Json;
 using System;
 using System.Text;
@@ -7,38 +6,37 @@ using System.IO;
 using NativeWifi;
 using System.Collections.ObjectModel;
 using Windows.UI.Notifications;
-using System.Diagnostics;
 
 namespace mifi_status
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
-        ToastNotifier toastManager;
-        int oldBatteryPercentage = 100;
-        private WlanClient wlan;
+        readonly ToastNotifier _toastManager;
+        int _oldBatteryPercentage = 100;
+        private WlanClient _wlan;
         public MainWindow()
         {
-            this.toastManager = ToastNotificationManager.CreateToastNotifier("mifi-battery-low");
+            _toastManager = ToastNotificationManager.CreateToastNotifier("mifi-battery-low");
             InitializeComponent();
         }
-        public void refreshData()
+        public void RefreshData()
         {
             string ssid0;
             try
             {
-                if (wlan == null)
+                if (_wlan == null)
                 {
-                    this.wlan = new WlanClient();
+                    _wlan = new WlanClient();
                 }
-                Collection<String> connectedSsids = new Collection<string>();
+                Collection<string> connectedSsids = new Collection<string>();
 
-                foreach (WlanClient.WlanInterface wlanInterface in wlan.Interfaces)
+                foreach (var wlanInterface in _wlan.Interfaces)
                 {
-                    Wlan.Dot11Ssid ssid = wlanInterface.CurrentConnection.wlanAssociationAttributes.dot11Ssid;
-                    connectedSsids.Add(new String(Encoding.ASCII.GetChars(ssid.SSID, 0, (int)ssid.SSIDLength)));
+                    var ssid = wlanInterface.CurrentConnection.wlanAssociationAttributes.dot11Ssid;
+                    connectedSsids.Add(new string(Encoding.ASCII.GetChars(ssid.SSID, 0, (int)ssid.SSIDLength)));
                 }
 
                 ssid0 = connectedSsids[0];
@@ -52,18 +50,21 @@ namespace mifi_status
             {
                 try
                 {
-                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://192.168.0.1/cgi-bin/qcmap_web_cgi");
+                    var request = (HttpWebRequest)WebRequest.Create("http://192.168.0.1/cgi-bin/qcmap_web_cgi");
                     request.ServicePoint.Expect100Continue = false;
                     request.Method = "POST";
                     byte[] data = Encoding.UTF8.GetBytes("{\"module\":\"status\",\"action\":0}");
                     request.ContentLength = data.Length;
-                    Stream stream = request.GetRequestStream();
+                    var stream = request.GetRequestStream();
                     stream.Write(data, 0, data.Length);
                     stream.Close();
-                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                    var response = (HttpWebResponse)request.GetResponse();
                     stream = response.GetResponseStream();
-                    StreamReader reader = new StreamReader(stream);
-                    string serializedJson = reader.ReadToEnd();
+
+                    if (stream == null) return;
+
+                    var reader = new StreamReader(stream);
+                    var serializedJson = reader.ReadToEnd();
 
                     dynamic json = JsonConvert.DeserializeObject(serializedJson);
 
@@ -71,80 +72,80 @@ namespace mifi_status
                     string[] networks = { "no service", "GSM", "3G", "LTE", "TD-SCDMA", "CDMA 1x", "CDMA EVDO" };
                     string[] sims = { "invalid", "no SIM", "error", "ready", "PIN requested", "PIN verified", "PUK requested", "permanently locked" };
 
-                    int voltage = Convert.ToInt32(json.battery.voltage);
-                    this.statusConn.Content = connections[json.wan.connectStatus];
-                    this.statusBatt.Content = json.battery.voltage + "%";
-                    this.statusNet.Content = networks[json.wan.networkType] + " (" + json.wan.signalStrength + "/4)";
-                    this.statusSIM.Content = sims[json.wan.simStatus];
-                    this.statusClients.Content = json.connectedDevices.number;
-                    double ds = Convert.ToDouble(json.wan.dailyStatistics);
-                    double ts = Convert.ToDouble(json.wan.totalStatistics);
-                    this.statusUse.Content = getFilesizeHuman(ds, 2) + " / " + getFilesizeHuman(ts, 2);
-                    double rxs = Convert.ToDouble(json.wan.rxSpeed);
-                    double txs = Convert.ToDouble(json.wan.txSpeed);
-                    this.statusSpeed.Content = getFilesizeHuman(txs, 1) + "/s / " + getFilesizeHuman(rxs, 1) + "/s";
+                    var voltage = Convert.ToInt32(json.battery.voltage);
+                    StatusConn.Content = connections[json.wan.connectStatus];
+                    StatusBatt.Content = json.battery.voltage + "%";
+                    StatusNet.Content = networks[json.wan.networkType] + " (" + json.wan.signalStrength + "/4)";
+                    StatusSim.Content = sims[json.wan.simStatus];
+                    StatusClients.Content = json.connectedDevices.number;
+                    var ds = Convert.ToDouble(json.wan.dailyStatistics);
+                    var ts = Convert.ToDouble(json.wan.totalStatistics);
+                    StatusUse.Content = GetFilesizeHuman(ds, 2) + " / " + GetFilesizeHuman(ts, 2);
+                    var rxs = Convert.ToDouble(json.wan.rxSpeed);
+                    var txs = Convert.ToDouble(json.wan.txSpeed);
+                    StatusSpeed.Content = GetFilesizeHuman(txs, 1) + "/s / " + GetFilesizeHuman(rxs, 1) + "/s";
 
-                    sendBatteryNotification(voltage);
+                    SendBatteryNotification(voltage);
                 }
                 catch (Exception)
                 {
-                    setAllToEmptyString();
+                    SetAllToEmptyString();
                 }
             }
             else
             {
-                setAllToEmptyString();
+                SetAllToEmptyString();
             }
 
         }
 
-        private void setAllToEmptyString()
+        private void SetAllToEmptyString()
         {
-            String empty = "–";
-            this.statusConn.Content = empty;
-            this.statusBatt.Content = empty;
-            this.statusNet.Content = empty;
-            this.statusSIM.Content = empty;
-            this.statusUse.Content = empty;
-            this.statusSpeed.Content = empty;
-            this.statusClients.Content = empty;
+            const string empty = "–";
+            StatusConn.Content = empty;
+            StatusBatt.Content = empty;
+            StatusNet.Content = empty;
+            StatusSim.Content = empty;
+            StatusUse.Content = empty;
+            StatusSpeed.Content = empty;
+            StatusClients.Content = empty;
         }
 
-        public string getFilesizeHuman(double len, int decimalPlaces = 0)
+        public string GetFilesizeHuman(double len, int decimalPlaces = 0)
         {
             string[] sizes = { "B", "KB", "MB", "GB" };
-            int order = 0;
+            var order = 0;
             while (len >= 1024 && ++order < sizes.Length)
             {
                 len = len / 1024;
             }
 
-            String decimalPlacesString = "";
+            var decimalPlacesString = "";
 
             while (decimalPlaces > 0)
             {
                 decimalPlacesString += "0";
                 decimalPlaces--;
             }
-
-            return String.Format("{0:0." + decimalPlacesString + "} {1}", len, sizes[order]);
+            
+            // ReSharper disable FormatStringProblem
+            return string.Format("{0:0." + decimalPlacesString + "} {1}", len, sizes[order]);
         }
 
-        public void sendBatteryNotification(int percentage)
+        public void SendBatteryNotification(int percentage)
         {
-            if (this.oldBatteryPercentage != percentage)
-            {
-                this.oldBatteryPercentage = percentage;
-                if (percentage <= 20)
-                {
-                    var xml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText02);
-                    var text = xml.GetElementsByTagName("text");
-                    text[0].AppendChild(xml.CreateTextNode("mifi-status"));
-                    text[1].AppendChild(xml.CreateTextNode("Battery level: " + percentage + "%"));
-                    var toast = new ToastNotification(xml);
-                    this.toastManager.Show(toast);
-                }
-            }
+            if (_oldBatteryPercentage == percentage) return;
+
+            _oldBatteryPercentage = percentage;
+
+            if (percentage > 20) return;
+
+            var xml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText02);
+            var text = xml.GetElementsByTagName("text");
+            text[0].AppendChild(xml.CreateTextNode("mifi-status"));
+            text[1].AppendChild(xml.CreateTextNode("Battery level: " + percentage + "%"));
+            var toast = new ToastNotification(xml);
+            _toastManager.Show(toast);
         }
 
     }
