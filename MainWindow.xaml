@@ -29,6 +29,7 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
             <RowDefinition Height="0.5*" />
         </Grid.RowDefinitions>
         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1" x:Name="LabelConn" Content="Connection"/>
@@ -38,6 +39,7 @@
         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="5" x:Name="LabelBatt" Content="Battery" />
         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="6" x:Name="LabelSpeed" Content="Speed (up/down)" />
         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="7" x:Name="LabelClients" Content="Connected devices" />
+        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="8" x:Name="LabelMessages" Content="Messages" />
         <Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="6" Grid.ColumnSpan="5" Grid.Row="1" FontFamily="Source Code Pro" x:Name="StatusConn" Content="–"/>
         <Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="6" Grid.ColumnSpan="5" Grid.Row="2" FontFamily="Source Code Pro" x:Name="StatusNet" Content="–"/>
         <Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="6" Grid.ColumnSpan="5" Grid.Row="3" FontFamily="Source Code Pro" x:Name="StatusSim" Content="–"/>
@@ -45,5 +47,6 @@
         <Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="6" Grid.ColumnSpan="5" Grid.Row="5" FontFamily="Source Code Pro" x:Name="StatusBatt" Content="–"/>
         <Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="6" Grid.ColumnSpan="5" Grid.Row="6" FontFamily="Source Code Pro" x:Name="StatusSpeed" Content="–"/>
         <Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="6" Grid.ColumnSpan="5" Grid.Row="7" FontFamily="Source Code Pro" x:Name="StatusClients" Content="–"/>
+        <Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="6" Grid.ColumnSpan="5" Grid.Row="8" FontFamily="Source Code Pro" x:Name="StatusMessages" Content="–"/>
     </Grid>
 </Window>

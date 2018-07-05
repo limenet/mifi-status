@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using NativeWifi;
 using System.Collections.ObjectModel;
-using Windows.UI.Notifications;
+using System.Windows.Media;
 
 namespace mifi_status
 {
@@ -14,14 +14,15 @@ namespace mifi_status
     /// </summary>
     public partial class MainWindow
     {
-        readonly ToastNotifier _toastManager;
-        int _oldBatteryPercentage = 100;
+        private int _oldBatteryPercentage = 100;
+        private int _lowBatteryPercentage = 25;
         private WlanClient _wlan;
+
         public MainWindow()
         {
-            _toastManager = ToastNotificationManager.CreateToastNotifier("mifi-battery-low");
             InitializeComponent();
         }
+
         public void RefreshData()
         {
             string ssid0;
@@ -78,6 +79,7 @@ namespace mifi_status
                     StatusNet.Content = networks[json.wan.networkType] + " (" + json.wan.signalStrength + "/4)";
                     StatusSim.Content = sims[json.wan.simStatus];
                     StatusClients.Content = json.connectedDevices.number;
+                    StatusMessages.Content = json.message.unreadMessages;
                     var ds = Convert.ToDouble(json.wan.dailyStatistics);
                     var ts = Convert.ToDouble(json.wan.totalStatistics);
                     StatusUse.Content = GetFilesizeHuman(ds, 2) + " / " + GetFilesizeHuman(ts, 2);
@@ -85,7 +87,7 @@ namespace mifi_status
                     var txs = Convert.ToDouble(json.wan.txSpeed);
                     StatusSpeed.Content = GetFilesizeHuman(txs, 1) + "/s / " + GetFilesizeHuman(rxs, 1) + "/s";
 
-                    SendBatteryNotification(voltage);
+                    LowBatteryNotification(voltage);
                 }
                 catch (Exception)
                 {
@@ -111,7 +113,7 @@ namespace mifi_status
             StatusClients.Content = empty;
         }
 
-        public string GetFilesizeHuman(double len, int decimalPlaces = 0)
+        private static string GetFilesizeHuman(double len, int decimalPlaces = 0)
         {
             string[] sizes = { "B", "KB", "MB", "GB" };
             var order = 0;
@@ -132,20 +134,17 @@ namespace mifi_status
             return string.Format("{0:0." + decimalPlacesString + "} {1}", len, sizes[order]);
         }
 
-        public void SendBatteryNotification(int percentage)
+        private void LowBatteryNotification(int percentage)
         {
             if (_oldBatteryPercentage == percentage) return;
 
             _oldBatteryPercentage = percentage;
 
-            if (percentage > 20) return;
+            var brush = percentage <= _lowBatteryPercentage ? new SolidColorBrush(Colors.Orange) : new SolidColorBrush(Colors.Transparent);
 
-            var xml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText02);
-            var text = xml.GetElementsByTagName("text");
-            text[0].AppendChild(xml.CreateTextNode("mifi-status"));
-            text[1].AppendChild(xml.CreateTextNode("Battery level: " + percentage + "%"));
-            var toast = new ToastNotification(xml);
-            _toastManager.Show(toast);
+            LabelBatt.Background = brush;
+            StatusBatt.Background = brush;
+
         }
 
     }
