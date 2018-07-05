@@ -4,6 +4,7 @@ using System.Windows.Threading;
 
 namespace mifi_status
 {
+    /// <inheritdoc />
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
